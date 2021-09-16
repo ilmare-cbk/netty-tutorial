@@ -41,6 +41,9 @@ public class DiscardServer {
 
             // Bind and start to accept incoming connections.
             ChannelFuture f = b.bind(port).sync();
+
+            // Wait until the server socket is closed.
+            f.channel().closeFuture().sync();
         }
         finally {
             workerGroup.shutdownGracefully();
